@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import java.security.KeyStore.TrustedCertificateEntry
 
@@ -54,5 +56,22 @@ class MainActivity : AppCompatActivity() {
             BIND_AUTO_CREATE
         )
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_start_button->{if (isConnected) timerBinder.start(100, handler)}
+            R.id.action_pause_button->{if (isConnected) timerBinder.pause()}
+            R.id.action_stop_button->{if (isConnected) timerBinder.stop()}
+        }
+
+
+        return super.onOptionsItemSelected(item)
     }
 }
